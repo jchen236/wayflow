@@ -36,21 +36,28 @@ for i in range(len(your_list)):
 
 max_similarity = 0
 max = 0
+#
+# for i in range(8000):
+#     print('hi')
+#     index = 'SENT_' + str(i)
+#     if cosine_similarity(model.docvecs[index], term) > max_similarity and  i != 0:
+#         max_similarity = cosine_similarity(model.docvecs[index], term)
+#         max = i
+#
+# print(your_list[0][6])
+# print(max)
+# print(max_similarity)
+# print(your_list[max][6])
+# topn = model.docvecs.most_similar([term], topn = 5)
+# indices = [(i[0]) for i in topn]
+# print(indices)
+# for index, item in enumerate(indices):
+#     indices[index] = (int)(item.replace('SENT_', ''))
+# print(indices)
+# for i in range(len(indices)):
+#     print(your_list[indices[i]][6])
+print(model.most_similar(positive=['javascript', 'console'],  topn=50) )
+tokens = "javascript console debugger".split()
 
-for i in range(8000):
-    print('hi')
-    index = 'SENT_' + str(i)
-    if cosine_similarity(model.docvecs[index], term) > max_similarity and  i != 0:
-        max_similarity = cosine_similarity(model.docvecs[index], term)
-        max = i
-
-print(your_list[0][6])
-print(max)
-print(max_similarity)
-print(your_list[max][6])
-topn = model.docvecs.most_similar([term], topn = 5)
-indices = [(i[0]) for i in topn]
-print(indices)
-for index, item in enumerate(indices):
-    indices[index] = your_list[(int)(item.replace('SENT_', ''))]
-    print(indices[index])
+new_vector = model.infer_vector(tokens)
+print(model.docvecs.most_similar([new_vector]))
